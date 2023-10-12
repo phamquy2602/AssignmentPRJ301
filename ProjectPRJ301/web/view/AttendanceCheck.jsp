@@ -162,7 +162,7 @@
             <!-- end of header -->
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Check Attendance</h4>
+                    <h4>Check Attendance - SE12345 - PRJ301 - Slotxx</h4>
                     <table class="table table-bordered custom-table">
                         <thead>
                             <tr>
