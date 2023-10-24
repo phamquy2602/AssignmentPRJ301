@@ -36,17 +36,19 @@ public class UserDBContext extends DBContext<User>{
     @Override
     public User get(User model) {
        try {
-            String sql = "SELECT * FROM [Student]\n" +
-"                    WHERE Email = ?  AND [password] = ? ?";
+            String sql = "SELECT * FROM [User]\n" +
+"                   WHERE [username] = ?  AND [password] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, model.getEmail());
+            stm.setString(1, model.getUsername());
             stm.setString(2, model.getPassword());
             ResultSet rs = stm.executeQuery();
             if(rs.next())
             {
                 User user = new User();
-                user.setEmail(model.getEmail());
+                user.setId(model.getId());
+                user.setUsername(model.getUsername());
                 user.setPassword(model.getPassword());
+                user.setDisplayname(model.getDisplayname());
                 return user;
             }
         } catch (SQLException ex) {
@@ -60,18 +62,15 @@ public class UserDBContext extends DBContext<User>{
         ArrayList<User> users = new ArrayList<>();
 
         try {
-            String sql = "select * from student";
+            String sql = "select * from [User]";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                User u = new User();
-                u.setId(rs.getInt("Id"));
-                u.setName(rs.getString("Name"));
-                u.setEmail(rs.getString("Email"));
-                u.setPassword(rs.getString("Password"));
-                u.setAvatar(rs.getString("Avatar"));
-                u.setTerm(rs.getInt("Term"));
-               
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setPassword(rs.getString("password"));
+                u.setDisplayname(rs.getString("displayname"));
                 
                 users.add(u);
             }
@@ -88,8 +87,10 @@ public class UserDBContext extends DBContext<User>{
     }
     public static void main(String[] args) {
         UserDBContext dao = new UserDBContext();
+//        User u = new User(1, "admin", "admin@gmail.com", "123", "123", 1);
+//        dao.get(u);
         ArrayList<User> list = dao.list();
-
         System.out.println(list);
+       
     }
 }

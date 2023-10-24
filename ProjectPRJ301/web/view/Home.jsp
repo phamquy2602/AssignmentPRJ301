@@ -28,7 +28,7 @@
         <link href="../css/bootstrap-icons.css" rel="stylesheet">
 
         <link href="../css/templatemo-topic-listing.css" rel="stylesheet">      
-
+        
     </head>
     <style>
         .navbar-nav .nav-link {
@@ -61,7 +61,7 @@
 
         <main>
             <!-- header -->
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg" >
                 <div class="container">
                     <a class="navbar-brand" href="Home.jsp">
                         <img src="https://www.goabroad.com/section_cloudinary/gaplabs/image/upload/v1/images2/clients/logos/MAIN/fptcorp-logo-1563325940.jpg" style="height: 110px;width: 100px;" alt="Homepage" />

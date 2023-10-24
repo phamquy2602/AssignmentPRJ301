@@ -13,23 +13,26 @@ import java.sql.Date;
  */
 public class User implements IBaseModel{
     private int id ;
-    private String name;
-    private String email;
+    private String username;
     private String password;
-    private String avatar;
-    private int term;
+    private String displayname;
+    
     
 
     public User() {
     }
 
-    public User(int id, String name, String email, String password, String avatar, int term) {
+    public User(int id, String username, String password, String displayname) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.username = username;
         this.password = password;
-        this.avatar = avatar;
-        this.term = term;
+        this.displayname = displayname;
+    }
+
+    public User(String username, String password, String displayname) {
+        this.username = username;
+        this.password = password;
+        this.displayname = displayname;
     }
 
     public int getId() {
@@ -40,20 +43,12 @@ public class User implements IBaseModel{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -64,28 +59,24 @@ public class User implements IBaseModel{
         this.password = password;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public int getTerm() {
-        return term;
-    }
-
-    public void setTerm(int term) {
-        this.term = term;
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", avatar=" + avatar + ", term=" + term + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", displayname=" + displayname + '}';
     }
+
+    
+    
+}
 
    
     
     
-}
+
