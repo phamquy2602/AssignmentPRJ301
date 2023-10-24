@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/Login.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/Login.jsp").forward(request, response);
     }
 
     /**
@@ -94,10 +94,10 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
-            request.getRequestDispatcher("view/Home.jsp").forward(request, response);
+            request.getRequestDispatcher("home").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Username or password wrong!!! Please login again");
-            request.getRequestDispatcher("view/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/Login.jsp").forward(request, response);
         }
     }
 
