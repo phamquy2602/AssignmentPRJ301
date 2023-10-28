@@ -38,7 +38,7 @@
                                 <c:if test="${k.date eq d and k.slot.id == s.id}">
                                    
                                     
-                                    <a href="att?id=${k.id}">
+                                    <a href="attendancetaking?id=${k.id}">
 
                                         ${k.group.name}  ${k.group.subject.name}<br>
                                         ${k.room.name}
