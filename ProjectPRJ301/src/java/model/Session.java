@@ -5,6 +5,8 @@
 package model.assingment;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import model.Attendance;
 import model.IBaseModel;
 
 /**
@@ -19,9 +21,23 @@ public class Session implements IBaseModel{
     private Room room;
     private TimeSlot slot;
     private int index;
+    private boolean isAtt;
+    private ArrayList<Attendance> atts = new ArrayList<>();
 
     public Session() {
     }
+
+    public Session(int id, Date date, Group group, Instructor instructor, Room room, TimeSlot slot, int index, boolean isAtt) {
+        this.id = id;
+        this.date = date;
+        this.group = group;
+        this.instructor = instructor;
+        this.room = room;
+        this.slot = slot;
+        this.index = index;
+        this.isAtt = isAtt;
+    }
+    
 
     public Session(Date date, Group group, Instructor instructor, Room room, TimeSlot slot, int index) {
         this.date = date;
@@ -98,10 +114,29 @@ public class Session implements IBaseModel{
         this.index = index;
     }
 
+    public boolean isIsAtt() {
+        return isAtt;
+    }
+
+    public void setIsAtt(boolean isAtt) {
+        this.isAtt = isAtt;
+    }
+
+    public ArrayList<Attendance> getAtts() {
+        return atts;
+    }
+
+    public void setAtts(ArrayList<Attendance> atts) {
+        this.atts = atts;
+    }
+
     @Override
     public String toString() {
-        return "Session{" + "id=" + id + ", date=" + date + ", group=" + group + ", instructor=" + instructor + ", room=" + room + ", slot=" + slot + ", index=" + index + '}';
+        return "Session{" + "id=" + id + ", date=" + date + ", group=" + group + ", instructor=" + instructor + ", room=" + room + ", slot=" + slot + ", index=" + index + ", isAtt=" + isAtt + ", atts=" + atts + '}';
     }
+    
+
+    
 
     
     

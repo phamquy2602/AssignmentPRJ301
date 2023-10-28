@@ -19,9 +19,10 @@
             To <input type="date" value="${requestScope.to}" name="to"/> 
             <input type="submit" value="View"/>
         </form>
+
         <table border="1px">
             <tr>
-                <td></td>
+                <td style="text-align: center">SLOT/DATE</td>
                 <c:forEach items="${requestScope.dates}" var="d">
                     <td>
                         ${d}
@@ -30,14 +31,19 @@
             </tr>
             <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
                 <tr>
-                    <td>${s.id}-${s.description}</td>
+                    <td>slot-${s.id}-${s.description}</td>
                     <c:forEach items="${requestScope.dates}" var="d">
                         <td>
                             <c:forEach items="${requestScope.sessions}" var="k">
-                                <c:if test="${k.date eq d and k.slot.id eq s.id}">
+                                <c:if test="${k.date eq d and k.slot.id == s.id}">
+                                   
+                                    
                                     <a href="att?id=${k.id}">
-                                        ${k.group.name}-${k.group.subject.name}-${k.room.id}
+
+                                        ${k.group.name}  ${k.group.subject.name}<br>
+                                        ${k.room.name}
                                     </a>
+                                    
                                 </c:if>
                             </c:forEach>
                         </td>
