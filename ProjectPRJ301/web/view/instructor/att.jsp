@@ -14,7 +14,7 @@
     </head>
     <body>
         ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
-        <form action="att" method="POST">
+        <form action="attendancetaking" method="POST">
             <table border="1px">
                 <tr>
                     <td>Student</td>

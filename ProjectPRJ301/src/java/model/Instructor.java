@@ -82,5 +82,10 @@ public class Instructor implements IBaseModel{
     public void setSessions(ArrayList<Session> sessions) {
         this.sessions = sessions;
     }
+
+    @Override
+    public String toString() {
+        return "Instructor{" + "id=" + id + ", name=" + name + ", groups=" + groups + ", sessions=" + sessions + ", user=" + user + '}';
+    }
     
 }

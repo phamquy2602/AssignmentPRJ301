@@ -20,6 +20,26 @@
         <servlet-name>AttendanceTakingController</servlet-name>
         <servlet-class>controller.instructor.AttendanceTakingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HeaderController</servlet-name>
+        <servlet-class>controller.HeaderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupManagerController</servlet-name>
+        <servlet-class>controller.manager.GroupManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteGroupController</servlet-name>
+        <servlet-class>controller.manager.DeleteGroupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddGroupController</servlet-name>
+        <servlet-class>controller.manager.AddGroupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditGroupController</servlet-name>
+        <servlet-class>controller.manager.EditGroupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -39,6 +59,26 @@
     <servlet-mapping>
         <servlet-name>AttendanceTakingController</servlet-name>
         <url-pattern>/attendancetaking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HeaderController</servlet-name>
+        <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupManagerController</servlet-name>
+        <url-pattern>/listgroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteGroupController</servlet-name>
+        <url-pattern>/deletegroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGroupController</servlet-name>
+        <url-pattern>/addgroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditGroupController</servlet-name>
+        <url-pattern>/editgroup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
