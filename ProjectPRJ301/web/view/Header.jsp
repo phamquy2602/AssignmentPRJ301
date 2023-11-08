@@ -31,12 +31,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Registration/Application</a>
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Suspend one semester to take repeated course</a></li>
-                                    <li><a class="dropdown-item" href="#">Suspend one semester</a></li>
-                                    <li><a class="dropdown-item" href="#">Move out class</a></li>
-                                    <li><a class="dropdown-item" href="#">Register to improve mark </a></li>
-                                    <li><a class="dropdown-item" href="#">Send Application</a></li>
-                                    <li><a class="dropdown-item" href="#">Choose paid items</a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

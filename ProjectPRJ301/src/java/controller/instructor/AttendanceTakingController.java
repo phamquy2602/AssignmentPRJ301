@@ -96,7 +96,7 @@ public class AttendanceTakingController extends HttpServlet {
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
-        response.getWriter().println("done");
+        request.getRequestDispatcher("/home").forward(request, response);
 
     }
 

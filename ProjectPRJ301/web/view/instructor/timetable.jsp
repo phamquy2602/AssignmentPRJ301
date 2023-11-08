@@ -19,7 +19,7 @@
             To <input type="date" value="${requestScope.to}" name="to"/> 
             <input type="submit" value="View"/>
         </form>
-
+          
         <table border="1px">
             <tr>
                 <td style="text-align: center">SLOT/DATE</td>
@@ -41,7 +41,7 @@
                                     <a href="attendancetaking?id=${k.id}">
 
                                         ${k.group.name}  ${k.group.subject.name}<br>
-                                        ${k.room.name}
+                                        ${k.room.name} 
                                     </a>
                                     
                                 </c:if>

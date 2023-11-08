@@ -26,7 +26,7 @@
                     <tr>
                         <td>
                             ${a.student.name}
-                            <input type="hidden" name="stuid" value="${a.student.id}"/>
+                            <input type="hidden"  name="stuid" value="${a.student.id}"/>
                         </td>
                         <td>
                             <input type="radio"
@@ -39,6 +39,10 @@
                                        checked="checked"
                                    </c:if>
                                    name="status${a.student.id}" value="present" /> present
+
+                            
+
+
                         </td>
                         <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
                         <td>${a.datetime}</td>
@@ -46,7 +50,7 @@
                 </c:forEach>
 
             </table>
-            <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
+            <input type="hidden"  value="${requestScope.ses.id}" name="sesid"/>
             <input type="submit" value="Save"/>
         </form>
     </body>

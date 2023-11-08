@@ -80,6 +80,11 @@
         <servlet-name>EditGroupController</servlet-name>
         <url-pattern>/editgroup</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>
+            login
+        </welcome-file>
+    </welcome-file-list>
     <session-config>
         <session-timeout>
             30

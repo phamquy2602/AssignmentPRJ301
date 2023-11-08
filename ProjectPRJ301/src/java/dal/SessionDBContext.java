@@ -130,7 +130,7 @@ public class SessionDBContext extends DBContext<Session> {
             stm_update_isAtt.executeUpdate();
 
             //Remove existing attendences
-            String sql_remove_atts = "DELETE Attendance WHERE id = ?";
+            String sql_remove_atts = "DELETE Attendance WHERE Sessionid = ?";
             PreparedStatement stm_remove_atts = connection.prepareStatement(sql_remove_atts);
             stm_remove_atts.setInt(1, ses.getId());
             stm_remove_atts.executeUpdate();
@@ -238,11 +238,20 @@ public class SessionDBContext extends DBContext<Session> {
         return sessions;
     }
 
+//    public static void main(String[] args) {
+//        SessionDBContext dao = new SessionDBContext();
+//        Session s = dao.getSessions(2);
+//        System.out.println(s);
+//
+//    }
     public static void main(String[] args) {
         SessionDBContext dao = new SessionDBContext();
-        Session s = dao.getSessions(4);
-        System.out.println(s);
+        Session s = new Session();
 
+        
+        dao.addAttendences(s);
+
+        System.out.println("Attendance added successfully.");
     }
 
 }
