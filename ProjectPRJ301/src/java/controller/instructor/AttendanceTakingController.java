@@ -96,7 +96,10 @@ public class AttendanceTakingController extends HttpServlet {
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
-        request.getRequestDispatcher("/home").forward(request, response);
+        
+        request.getRequestDispatcher("view/Message.jsp").forward(request, response);
+        
+        
 
     }
 

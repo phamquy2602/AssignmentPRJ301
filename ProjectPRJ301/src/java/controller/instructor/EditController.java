@@ -3,21 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.instructor;
 
+import dal.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author quyde
  */
-public class HomeController extends HttpServlet {
+public class EditController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,8 +32,18 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        request.getRequestDispatcher("view/Home.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EditController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EditController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,7 +57,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("./view/Message.jsp").forward(request, response);
     } 
 
     /** 
@@ -57,9 +70,32 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User param = new User();
+        param.setUsername(username);
+        param.setPassword(password);
+        UserDBContext db = new UserDBContext();
+        User loggedUser = db.get(param);
+        if (loggedUser != null) {
 
+            HttpSession session = request.getSession();
+            session.setAttribute("account", loggedUser);
+
+            String remember = request.getParameter("remember");
+            if (remember != null) {
+                Cookie c_user = new Cookie("user", username);
+                Cookie c_pass = new Cookie("pass", password);
+                c_user.setMaxAge(24 * 3600);
+                c_pass.setMaxAge(24 * 3600);
+                response.addCookie(c_user);
+                response.addCookie(c_pass);
+            }
+            
+            session.setAttribute("userId", loggedUser.getId());
+            request.getRequestDispatcher("edit").forward(request, response);
+    }
+    }
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

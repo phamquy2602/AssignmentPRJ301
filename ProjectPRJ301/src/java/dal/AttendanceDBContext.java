@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
+import model.assingment.Instructor;
 import model.assingment.Session;
 import model.assingment.Student;
 
@@ -56,6 +57,84 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return atts;
     }
 
+    public ArrayList<Attendance> getAttendancesByGroupIdandInstructorId(String groupid, String insid) {
+        ArrayList<Attendance> atts = new ArrayList<>();
+        try {
+            String sql = "select ss.Insid, a.Sessionid ,s.id as StudentID,a.status,s.fullname from Attendance a  right join Student s on s.id = a.Stuid  \n"
+                    + "  inner join [Session] ss on ss.id = a.Sessionid\n"
+                    + "																			 \n"
+                    + "	where ss.Groupid = ? and ss.Insid =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, groupid);
+            stm.setString(2, insid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Attendance att = new Attendance();
+                att.setStatus(rs.getBoolean("status"));
+                
+                Session session = new Session();
+                session.setId(rs.getInt("Sessionid"));
+                att.setSession(session);
+                
+                Instructor instructor = new Instructor();
+                instructor.setId(rs.getInt("Insid"));
+                session.setInstructor(instructor);
+                
+                Student student = new Student();
+                student.setId(rs.getInt("StudentID"));
+                student.setName(rs.getString("fullname"));
+                att.setStudent(student);
+
+                
+
+                atts.add(att);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return atts;
+    }
+    
+    
+    
+    
+
+    public ArrayList<Attendance> listAllAttendance() {
+        ArrayList<Attendance> attendances = new ArrayList<>();
+        try {
+            String sql = "select a.Sessionid ,s.id as StudentID,a.status,s.fullname from Attendance a  right  join Student s on s.id = a.Stuid  ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+
+                Attendance att = new Attendance();
+                att.setStatus(rs.getBoolean("status"));
+
+                Session session = new Session();
+                session.setId(rs.getInt("Sessionid"));
+                att.setSession(session);
+
+                Student student = new Student();
+                student.setId(rs.getInt("StudentID"));
+                student.setName(rs.getString("fullname"));
+                att.setStudent(student);
+
+                attendances.add(att);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return attendances;
+    }
+
+    public static void main(String[] args) {
+        AttendanceDBContext dao = new AttendanceDBContext();
+        ArrayList<Attendance> list = dao.getAttendancesByGroupIdandInstructorId("7", "3");
+        System.out.println(list);
+
+    }
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

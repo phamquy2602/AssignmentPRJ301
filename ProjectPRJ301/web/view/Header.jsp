@@ -38,15 +38,13 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Information Access</a>
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                     <li><a class="dropdown-item" href="timetable?id=${userId}">Weekly timetable</a></li>
-                                    <li><a class="dropdown-item" href="#">View exam schedule</a></li>
-                                    <li><a class="dropdown-item" href="#">View syllabuses</a></li>
+                                    <li><a class="dropdown-item" href="#">Attendance Status</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">reports</a>
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Attendance report</a></li>
-                                    <li><a class="dropdown-item" href="ViewScore.jsp">ViewScore</a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="nav-item">

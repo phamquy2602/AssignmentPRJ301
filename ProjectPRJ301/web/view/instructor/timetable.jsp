@@ -13,8 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <h1>  <a href="home">Home</a></h1>
         <form action="timetable" method="GET">
-            <input type="hidden" name="id" value="${param.id}"/>
+            <input  name="id" value="${param.id}"/>
             From <input type="date" value="${requestScope.from}" name="from"/> 
             To <input type="date" value="${requestScope.to}" name="to"/> 
             <input type="submit" value="View"/>

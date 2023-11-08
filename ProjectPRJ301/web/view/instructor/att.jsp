@@ -13,6 +13,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        
+        
         ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
         <form action="attendancetaking" method="POST">
             <table border="1px">
@@ -51,7 +54,11 @@
 
             </table>
             <input type="hidden"  value="${requestScope.ses.id}" name="sesid"/>
+             
             <input type="submit" value="Save"/>
+            
+            
+            
         </form>
     </body>
 </html>
