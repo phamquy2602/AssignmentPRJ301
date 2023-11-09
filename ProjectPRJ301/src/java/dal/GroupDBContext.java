@@ -73,6 +73,32 @@ public class GroupDBContext extends DBContext<Group> {
         return groups;
     }
 
+    public ArrayList<Group> listAllGroup(String insId) {
+        ArrayList<Group> groups = new ArrayList<>();
+        try {
+            String sql = "select * from [Group] where Insid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, insId);  // Truyền giá trị id vào câu truy vấn
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group group = new Group();
+                group.setId(rs.getInt("id"));
+                group.setName(rs.getString("Gname"));
+                groups.add(group);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return groups;
+    }
+    
+    public static void main(String[] args) {
+        GroupDBContext dao = new GroupDBContext();
+        ArrayList<Group> list = dao.listAllGroup("2");
+        System.out.println(list);
+
+    }
+
     public void delete(String id) {
         try {
             String sql = "delete from [Group] where id = ?";
@@ -130,13 +156,12 @@ public class GroupDBContext extends DBContext<Group> {
         }
 
     }
-    
-    
+
     public Group get(String gid) {
-        String sql = "Select g.id as groupid , g.Gname, g.Insid,g.Subid ,i.ifullname as InstructorName, s.Subname from [Group] g \n" +
-"                    inner join Instructor i on i.id = g.Insid\n" +
-"                    inner join Subject s on s.id = g.Subid\n" +
-"					where g.id = ?";
+        String sql = "Select g.id as groupid , g.Gname, g.Insid,g.Subid ,i.ifullname as InstructorName, s.Subname from [Group] g \n"
+                + "                    inner join Instructor i on i.id = g.Insid\n"
+                + "                    inner join Subject s on s.id = g.Subid\n"
+                + "					where g.id = ?";
         try {
             PreparedStatement statement = connection.prepareCall(sql);
             statement.setString(1, gid);
@@ -156,7 +181,6 @@ public class GroupDBContext extends DBContext<Group> {
                 subject.setName(rs.getString("Subname"));
                 group.setSubject(subject);
 
-               
                 return group;
             }
 
@@ -167,9 +191,5 @@ public class GroupDBContext extends DBContext<Group> {
         return null;
     }
 
-    public static void main(String[] args) {
-        GroupDBContext dao = new GroupDBContext();
-        dao.EditGroup("hihi", "15", "2", "15");
-        
-    }
+    
 }

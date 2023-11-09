@@ -1,12 +1,11 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : timetable
-    Created on : Oct 18, 2023, 2:16:05 PM
-    Author     : sonnt
+    Document   : ListAllGroup
+    Created on : Nov 9, 2023, 5:37:27 AM
+    Author     : quyde
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -103,48 +102,35 @@
                     </div>
                 </div>
             </nav>
-    
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>List All Groups</title>
+    </head>
     <body>
+        <h2 style="color: orange">List of Groups</h2>
+        <form action="listgroupinstructor" method="GET">
+            <input type="hidden"  name="id" value="${userId}"/>
+        </form>   
+            
         
-        
-        <form action="timetable" method="GET">
-            <input type="hidden" name="id" value="${param.id}"/>
-            From <input type="date" value="${requestScope.from}" name="from"/> 
-            To <input type="date" value="${requestScope.to}" name="to"/> 
-            <input type="submit" value="View"/>
-        </form>
-          
-        <table border="1px">
-            <tr>
-                <td style="text-align: center">SLOT/DATE</td>
-                <c:forEach items="${requestScope.dates}" var="d">
-                    <td>
-                        ${d}
-                    </td>
-                </c:forEach>
-            </tr>
-            <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
-                <tr>
-                    <td>slot-${s.id}-${s.description}</td>
-                    <c:forEach items="${requestScope.dates}" var="d">
-                        <td>
-                            <c:forEach items="${requestScope.sessions}" var="k">
-                                <c:if test="${k.date eq d and k.slot.id == s.id}">
-                                   
-                                    
-                                    <a style="color: orange" href="attendancetaking?id=${k.id}">
-
-                                        ${k.group.name}  ${k.group.subject.name}<br>
-                                        ${k.room.name} 
-                                    </a>
-                                    
-                                </c:if>
-                            </c:forEach>
-                        </td>
-                    </c:forEach>
+        <table border="1">
+            <thead>
+                
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Function</th>
                 </tr>
-            </c:forEach>
-
+            </thead>
+            <tbody>
+                <c:forEach var="group" items="${listG}">
+                    <tr>
+                        <td>${group.id}</td>
+                        <td>${group.name}</td>
+                        <td><a style="color: orange" href="attendancestatus?id=${group.id}">Attendance Status Detail</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </body>
     <footer class="site-footer section-padding">

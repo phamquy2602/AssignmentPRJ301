@@ -71,21 +71,19 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             while (rs.next()) {
                 Attendance att = new Attendance();
                 att.setStatus(rs.getBoolean("status"));
-                
+
                 Session session = new Session();
                 session.setId(rs.getInt("Sessionid"));
                 att.setSession(session);
-                
+
                 Instructor instructor = new Instructor();
                 instructor.setId(rs.getInt("Insid"));
                 session.setInstructor(instructor);
-                
+
                 Student student = new Student();
                 student.setId(rs.getInt("StudentID"));
                 student.setName(rs.getString("fullname"));
                 att.setStudent(student);
-
-                
 
                 atts.add(att);
             }
@@ -95,10 +93,6 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         }
         return atts;
     }
-    
-    
-    
-    
 
     public ArrayList<Attendance> listAllAttendance() {
         ArrayList<Attendance> attendances = new ArrayList<>();
@@ -129,12 +123,46 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return attendances;
     }
 
+    public ArrayList<Attendance> getAttendancesByGroupId(String groupid) {
+        ArrayList<Attendance> atts = new ArrayList<>();
+        try {
+            String sql = "select  a.Sessionid ,s.id as StudentID,a.status,s.fullname from Attendance a  right join Student s on s.id = a.Stuid  \n"
+                    + "                                                                             inner join [Session] ss on ss.id = a.Sessionid\n"
+                    + "																			 \n"
+                    + "																			 where   ss.Groupid =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, groupid);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Attendance att = new Attendance();
+                att.setStatus(rs.getBoolean("status"));
+
+                Session session = new Session();
+                session.setId(rs.getInt("Sessionid"));
+                att.setSession(session);
+
+                Student student = new Student();
+                student.setId(rs.getInt("StudentID"));
+                student.setName(rs.getString("fullname"));
+                att.setStudent(student);
+
+                atts.add(att);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return atts;
+    }
+
     public static void main(String[] args) {
         AttendanceDBContext dao = new AttendanceDBContext();
-        ArrayList<Attendance> list = dao.getAttendancesByGroupIdandInstructorId("7", "3");
+        ArrayList<Attendance> list = dao.getAttendancesByGroupId("1");
         System.out.println(list);
 
     }
+
     @Override
     public void insert(Attendance model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

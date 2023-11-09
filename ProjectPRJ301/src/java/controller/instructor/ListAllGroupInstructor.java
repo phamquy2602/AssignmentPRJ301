@@ -5,7 +5,7 @@
 
 package controller.instructor;
 
-import dal.AttendanceDBContext;
+import dal.GroupDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,13 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import model.Attendance;
+import model.assingment.Group;
 
 /**
  *
  * @author quyde
  */
-public class AttendanceStatusController extends HttpServlet {
+public class ListAllGroupInstructor extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,14 +30,13 @@ public class AttendanceStatusController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String insId = request.getParameter("id");
         
-        String groupid = request.getParameter("id");
-        
-        AttendanceDBContext dao = new AttendanceDBContext();
-        ArrayList<Attendance> lista = dao.getAttendancesByGroupId(groupid);
-        request.setAttribute("lista",lista);
-        request.getRequestDispatcher("view/instructor/AttendanceStatus.jsp").forward(request, response);
-       
+        GroupDBContext dao = new GroupDBContext();
+        ArrayList<Group> listG = dao.listAllGroup(insId);
+        request.setAttribute("listG",listG);
+        request.getRequestDispatcher("view/instructor/ListAllGroup.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +63,7 @@ public class AttendanceStatusController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 
